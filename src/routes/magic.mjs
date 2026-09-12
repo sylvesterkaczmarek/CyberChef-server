@@ -7,7 +7,7 @@ import { magic } from "cyberchef";
  */
 router.post("/", async function magicPost(req, res, next) {
     try {
-        if (!req.body.input) {
+        if (!("input" in req.body)) {
             throw new TypeError("'input' property is required in request body");
         }
 

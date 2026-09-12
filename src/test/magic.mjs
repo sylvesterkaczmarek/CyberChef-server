@@ -11,6 +11,13 @@ describe("POST /magic", function() {
             .expect("'input' property is required in request body", done);
     });
 
+    it("should accept an empty string input", (done) => {
+        request(app)
+            .post("/magic")
+            .send({input: ""})
+            .expect(200, done);
+    });
+
     it("should return JSON when given some input, without content-type header", (done) => {
         request(app)
             .post("/magic")

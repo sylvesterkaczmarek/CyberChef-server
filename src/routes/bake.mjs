@@ -7,9 +7,11 @@ import { bake, Dish } from "cyberchef";
  */
 router.post("/", async function bakePost(req, res, next) {
     try {
-        const noRecipeOrInput = !req.body.input || !req.body.recipe;
-        if (noRecipeOrInput) {
-            throw new TypeError(`'${!req.body.input ? "input" : "recipe"}' property is required in request body`);
+        if (!("input" in req.body)) {
+            throw new TypeError("'input' property is required in request body");
+        }
+        if (!req.body.recipe) {
+            throw new TypeError("'recipe' property is required in request body");
         }
 
         const dish = await bake(req.body.input, req.body.recipe);

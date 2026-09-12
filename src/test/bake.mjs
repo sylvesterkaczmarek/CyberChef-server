@@ -28,6 +28,17 @@ describe("POST /bake", function() {
             .expect("'recipe' property is required in request body", done);
     });
 
+    it("should accept an empty string input", (done) => {
+        request(app)
+            .post("/bake")
+            .send({input: "", recipe: "To Hex"})
+            .expect(200)
+            .expect({
+                value: "",
+                type: "string",
+            }, done);
+    });
+
     it("should respond with the input if the recipe is empty", (done) => {
         request(app)
             .post("/bake")
